@@ -21,6 +21,20 @@ Decided in [Website structure and nynorsk copy](https://github.com/randax/produk
 
 All "Reserver" buttons link to `/#reserver`. The product pages never have their own form, which keeps measurement simple.
 
+## Concept images
+
+Seven Blender 3D renders of direction A «Boka» are in [`assets/concept-images/`](../assets/concept-images/). Every image carries the caption «Konseptbilete (3D-illustrasjon)».
+
+| File | Where |
+|---|---|
+| `heima-boksen-hero.jpg` | Landing hero (alongside the phone) and top of `/heima-boksen` |
+| `heima-boksen-detail.jpg` | `/heima-boksen` «Lyset» |
+| `heima-boksen-shelf-evening.jpg` | Landing «Set han i bokhylla. Ferdig.» |
+| `heima-boksen-shelf-day.jpg` | `/heima-boksen` |
+| `heima-boksen-back.jpg` | `/heima-boksen` «Kva er inni?» |
+| `heima-boksen-phone.jpg` | Landing assistant section, `/heima-appen` |
+| `heima-boksen-size.jpg` | `/heima-boksen` «Tal du forstår» |
+
 ## On every page
 
 **Concept banner** (top, always visible)
@@ -189,9 +203,9 @@ The six questions and answers from [`docs/messaging.md`](messaging.md#objections
    > - **Skal vere nesten lydlaus.**
 4. **Lyset**
    > Lyset gløder svakt når assistenten arbeider.
-
-   *Add materials and appearance from [Heima-boksen design and concept images](https://github.com/randax/produktutvikling/issues/11).*
-5. **Packages** (as on the landing page), then **[Reserver – heilt uforpliktande]** → `/#reserver`.
+5. **Utsjånad**
+   > Heima-boksen skal vere laga av eik og vere på storleik med ei bok: om lag 7,5 × 21 × 27 cm. Framme har han ei smal, ravfarga lysstripe. Bak er det berre ein straumkontakt og ein nettverkskontakt.
+6. **Packages** (as on the landing page), then **[Reserver – heilt uforpliktande]** → `/#reserver`.
 
 ## `/heima-appen`
 

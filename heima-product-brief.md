@@ -21,7 +21,7 @@ A private cloud and AI assistant that lives in the family's living room. Status:
 
 - **Feeling:** a lamp in the window on a November evening, not a server room. Wool, wood, warm light. No padlocks or circuit boards.
 - **Colours:** deep evening blue, warm amber, wool white.
-- **The box:** looks like furniture, not electronics. Wood or ceramic, the size of a book, with a soft amber glow when the AI is working. Something people want on the shelf rather than hidden in a cupboard.
+- **The box:** looks like furniture, not electronics. **Decided: direction A «Boka»**, an oak block the size of a book (about 7.5 × 21 × 27 cm) with a thin amber light slit on the front that glows when the assistant works, and only power and network sockets on the back. Something people want on the shelf rather than hidden in a cupboard.
 - **Voice:** calm, plain Norwegian, slightly dry. Example: *"Bildene dine er heima. Vi kan ikke se dem. Selv om vi ville."* ("Your photos are at home. We can't see them. Even if we wanted to.")
 
 ## 3. Positioning

@@ -1,0 +1,319 @@
+<title>Heima-appen Prototype</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Public+Sans:wght@400;600&display=swap">
+<style>
+/* PROTOTYPE – throwaway. Clickable Heima-appen: six launch flows in an iPhone frame, nynorsk, sample data. */
+:root {
+  --page: #EEF0F1; --page-ink: #17223A; --page-muted: #556074; --page-line: #D6DAE0;
+  --app: #F7F6F3; --card: #FFFFFF; --ink: #17223A; --muted: #5C677A; --line: #E3E5E9;
+  --amber: #B5690F; --amber-soft: #F6E7D0; --glow: #F2A63C; --night: #141D2E; --ok: #2F7A4F; --ok-soft: #E2F1E7;
+  --display: "Familjen Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --body: "Public Sans", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --page: #0E1522; --page-ink: #E8EBF0; --page-muted: #9AA5B8; --page-line: #27334B; color-scheme: dark; } }
+:root[data-theme="dark"] { --page: #0E1522; --page-ink: #E8EBF0; --page-muted: #9AA5B8; --page-line: #27334B; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--page-ink); font-family: var(--body); }
+.layout { max-width: 1040px; margin: 0 auto; padding: 40px max(16px, env(safe-area-inset-right, 0px)) 48px max(16px, env(safe-area-inset-left, 0px)); display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: start; }
+.side { display: grid; gap: 18px; align-content: start; max-width: 460px; min-width: 0; }
+.side h1 { font-family: var(--display); font-size: clamp(30px, 4vw, 44px); line-height: 1.1; margin: 0; text-wrap: balance; }
+.side p { margin: 0; color: var(--page-muted); line-height: 1.6; }
+.flows { display: grid; gap: 8px; }
+.flows button { font: 600 15px var(--body); text-align: left; display: grid; grid-template-columns: 28px 1fr; gap: 10px; align-items: center; background: transparent; color: var(--page-ink); border: 1px solid var(--page-line); border-radius: 14px; padding: 12px 14px; cursor: pointer; }
+.flows button span:first-child { font-family: var(--display); color: var(--amber); }
+.flows button small { display: block; font-weight: 400; color: var(--page-muted); font-size: 13px; }
+.flows button[aria-current="true"] { border-color: var(--glow); background: color-mix(in srgb, var(--glow) 12%, transparent); }
+.note { font-size: 13px; color: var(--page-muted); }
+.reset { font: 600 14px var(--body); background: none; border: 0; color: var(--amber); cursor: pointer; padding: 0; justify-self: start; }
+
+/* phone */
+.phone { width: 390px; max-width: 100%; aspect-ratio: 390 / 844; background: #0B0F18; border-radius: 56px; padding: 12px; box-shadow: 0 40px 90px rgba(20,29,46,.35), inset 0 0 0 2px #2A3142; position: relative; }
+.screen { position: relative; width: 100%; height: 100%; border-radius: 44px; overflow: hidden; background: var(--app); color: var(--ink); display: flex; flex-direction: column; font-size: 15px; }
+.island { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 112px; height: 32px; background: #000; border-radius: 20px; z-index: 5; }
+.status { height: 50px; flex: none; display: flex; justify-content: space-between; align-items: center; padding: 6px 30px 0; font-weight: 600; font-size: 14px; }
+.body { flex: 1; overflow-y: auto; padding: 8px 20px 20px; display: flex; flex-direction: column; gap: 14px; }
+.body.center { justify-content: center; text-align: center; align-items: center; }
+.tabbar { flex: none; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); background: rgba(255,255,255,.92); padding: 8px 6px 26px; }
+.tabbar button { font: 600 11px var(--body); background: none; border: 0; color: var(--muted); display: grid; justify-items: center; gap: 3px; cursor: pointer; }
+.tabbar button .ic { font-size: 20px; filter: grayscale(1); opacity: .7; }
+.tabbar button[aria-current="true"] { color: var(--amber); }
+.tabbar button[aria-current="true"] .ic { filter: none; opacity: 1; }
+
+h2.t { font-family: var(--display); font-size: 30px; line-height: 1.1; margin: 4px 0 0; }
+h3.t { font-family: var(--display); font-size: 22px; line-height: 1.15; margin: 0; }
+.p { margin: 0; color: var(--muted); line-height: 1.5; }
+.btn { font: 600 16px var(--body); border: 0; border-radius: 16px; padding: 15px 18px; cursor: pointer; width: 100%; }
+.btn.primary { background: var(--night); color: #fff; }
+.btn.amber { background: var(--glow); color: #2A1A05; }
+.btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+.btn:focus-visible, .flows button:focus-visible, .tabbar button:focus-visible, .card.tap:focus-visible { outline: 3px solid var(--glow); outline-offset: 2px; }
+.spacer { flex: 1; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 14px 16px; display: grid; gap: 6px; text-align: left; }
+.card.tap { cursor: pointer; font: inherit; color: inherit; width: 100%; }
+.row { display: flex; align-items: center; gap: 12px; }
+.row .grow { flex: 1; min-width: 0; }
+.muted { color: var(--muted); font-size: 13.5px; }
+.pill { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; border-radius: 999px; padding: 6px 12px; background: var(--ok-soft); color: var(--ok); align-self: flex-start; }
+.chip { display: inline-flex; gap: 6px; align-items: center; font-size: 13px; font-weight: 600; border-radius: 999px; padding: 6px 12px; background: var(--amber-soft); color: #6B3E07; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.avatar { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; color: #fff; flex: none; }
+.search { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; color: var(--muted); display: flex; gap: 8px; cursor: text; width: 100%; font: inherit; text-align: left; }
+.search.typed { color: var(--ink); }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+.ph { aspect-ratio: 1; border-radius: 8px; position: relative; border: 0; padding: 0; cursor: pointer; }
+.ph.sel::after { content: "✓"; position: absolute; right: 6px; top: 6px; width: 22px; height: 22px; border-radius: 50%; background: var(--glow); color: #2A1A05; font-weight: 700; font-size: 13px; display: grid; place-items: center; }
+.bar { height: 8px; border-radius: 8px; background: var(--line); overflow: hidden; }
+.bar span { display: block; height: 100%; background: var(--glow); border-radius: 8px; transition: width 1.2s ease; }
+.toast { position: absolute; left: 16px; right: 16px; bottom: 96px; background: var(--night); color: #fff; border-radius: 14px; padding: 12px 14px; font-size: 14px; z-index: 6; animation: up .25s ease; }
+@keyframes up { from { transform: translateY(10px); opacity: 0; } }
+.big-ic { width: 88px; height: 88px; border-radius: 28px; display: grid; place-items: center; font-size: 40px; background: var(--amber-soft); }
+.viewfinder { background: #111; border-radius: 20px; aspect-ratio: 3 / 4; position: relative; display: grid; place-items: center; overflow: hidden; }
+.viewfinder .frame { width: 62%; aspect-ratio: 1; border: 3px solid var(--glow); border-radius: 18px; display: grid; place-items: center; }
+.viewfinder .qr { width: 60%; aspect-ratio: 1; background:
+  conic-gradient(#fff 0 25%, #222 0 50%, #fff 0 75%, #222 0) 0 0 / 22% 22%; opacity: .85; border-radius: 4px; }
+.viewfinder .letter { width: 70%; aspect-ratio: 0.72; background: #fff; border-radius: 6px; padding: 14px; display: grid; align-content: start; gap: 6px; }
+.viewfinder .letter i { display: block; height: 6px; background: #D5D8DE; border-radius: 3px; }
+.viewfinder .hint { position: absolute; bottom: 14px; left: 0; right: 0; text-align: center; color: #fff; font-size: 13px; }
+.faceid { width: 96px; height: 96px; border: 4px solid var(--glow); border-radius: 28px; display: grid; place-items: center; font-size: 44px; animation: pulse 1.2s ease infinite; }
+@keyframes pulse { 50% { transform: scale(.94); } }
+.dots::after { content: "…"; animation: dots 1.2s steps(3) infinite; }
+.sheet-bg { position: absolute; inset: 0; background: rgba(10,14,22,.45); z-index: 4; display: flex; align-items: flex-end; }
+.sheet { background: var(--app); border-radius: 26px 26px 0 0; padding: 22px 20px 34px; display: grid; gap: 14px; width: 100%; max-height: 82%; overflow-y: auto; }
+.sec h4 { margin: 0 0 4px; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.sec p { margin: 0; line-height: 1.5; }
+.deadline { background: var(--amber-soft); border-radius: 14px; padding: 12px 14px; }
+.deadline strong { font-family: var(--display); font-size: 22px; display: block; }
+.bubble { border-radius: 18px; padding: 11px 14px; max-width: 86%; line-height: 1.45; }
+.bubble.me { background: var(--night); color: #fff; align-self: flex-end; }
+.bubble.heima { background: var(--card); border: 1px solid var(--line); align-self: flex-start; }
+.src { display: inline-flex; gap: 6px; margin-top: 8px; font-size: 13px; font-weight: 600; color: var(--amber); }
+.doc { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 16px; font-size: 12.5px; line-height: 1.55; color: #333; display: grid; gap: 8px; }
+.doc mark { background: #FBE2B5; padding: 1px 2px; border-radius: 3px; }
+.back { font: 600 15px var(--body); background: none; border: 0; color: var(--amber); padding: 0; cursor: pointer; align-self: flex-start; }
+.mini-logo { font-family: var(--display); font-weight: 700; display: inline-flex; gap: 6px; align-items: center; }
+.mini-logo::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--glow); box-shadow: 0 0 8px var(--glow); }
+
+@media (max-width: 860px) {
+  .layout { grid-template-columns: 1fr; justify-items: center; padding-top: 24px; }
+  .side { max-width: 560px; width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::after { animation: none !important; transition: none !important; } }
+</style>
+
+<div class="layout">
+  <div class="side">
+    <span class="mini-logo">Heima-appen</span>
+    <h1>Prøv appen sjølv</h1>
+    <p>Trykk deg gjennom slik Heima-appen skal fungere. Vel ei forteljing, eller klikk fritt i telefonen.</p>
+    <div class="flows" id="flows"></div>
+    <button class="reset" id="reset">↺ Start på nytt</button>
+    <p class="note">Konsept. Alle namn, bilete og brev er døme.</p>
+  </div>
+  <div class="phone" aria-label="Heima-appen på ein mobil">
+    <div class="screen" id="screen" aria-live="polite"></div>
+  </div>
+</div>
+
+<script>
+// ---------- sample data ----------
+const PH = ["linear-gradient(150deg,#C9A57B,#6E7F91)","linear-gradient(160deg,#8FA9B8,#3E5468)","linear-gradient(140deg,#D8C3A5,#A0704A)","linear-gradient(170deg,#9DB59A,#4E6B53)","linear-gradient(150deg,#E2C9A0,#C07A44)","linear-gradient(160deg,#B8C4D0,#5C6B80)","linear-gradient(140deg,#A88B6E,#4B3A2C)","linear-gradient(170deg,#CBB8D6,#6B5A7D)","linear-gradient(150deg,#E7D7B9,#8C9A72)"];
+const S = { selected: new Set(), members: [{ n: "Kari", r: "Deg", c: "#B5690F" }], toast: "", sheet: null };
+
+const FLOWS = [
+  ["start-1", "Kom i gang", "Skann boksen og lag familienøkkelen"],
+  ["fam-1", "Inviter familien", "Ola og bestemor får kvar sin nøkkel"],
+  ["search-1", "Finn bilete", "«bestemor på hytta sommaren 2019»"],
+  ["brev-1", "Forstå eit brev", "Eit brev frå NAV, forklart"],
+  ["spor-1", "Spør om dokumenta", "«Når går garantien ut?»"],
+  ["kven-1", "Kven kan sjå dette?", "Tilgang, Heima-lovnaden og eksport"],
+];
+const FLOW_OF = id => { const pref = id.split("-")[0]; return { start: 0, fam: 1, home: 2, search: 2, brev: 3, spor: 4, kven: 5 }[pref]; };
+
+// ---------- helpers ----------
+const tabbar = active => `<nav class="tabbar" aria-label="Faner">
+  ${[["home", "🖼", "Bilete"], ["brev-1", "📄", "Dokument"], ["spor-1", "💬", "Spør"], ["fam-1", "👪", "Familie"]].map(([go, ic, l]) =>
+    `<button data-go="${go}" aria-current="${active === l}"><span class="ic">${ic}</span>${l}</button>`).join("")}</nav>`;
+const grid = (n, start = 0, selectable = false) => `<div class="grid">${Array.from({ length: n }, (_, i) => {
+  const k = (i + start) % PH.length;
+  return `<button class="ph ${selectable && S.selected.has(i) ? "sel" : ""}" style="background:${PH[k]}" ${selectable ? `data-sel="${i}"` : `data-go="kven-1"`} aria-label="Bilete ${i + 1}"></button>`; }).join("")}</div>`;
+const member = m => `<div class="card"><div class="row"><span class="avatar" style="background:${m.c}">${m.n[0]}</span>
+  <div class="grow"><strong>${m.n}</strong><div class="muted">${m.r}</div></div><span class="pill">🔑 Har nøkkel</span></div></div>`;
+
+// ---------- screens ----------
+const SCREENS = {
+  // 1. Kom i gang
+  "start-1": () => ({ body: `<div class="body center"><div class="big-ic">📦</div>
+    <h2 class="t">Velkomen til Heima</h2><p class="p">Set Heima-boksen i straumen og kople han til ruteren. Så skannar du koden under boksen.</p>
+    <div class="spacer"></div><button class="btn primary" data-go="start-2">Skann koden</button></div>` }),
+  "start-2": () => ({ body: `<div class="body"><h3 class="t">Skann koden under boksen</h3>
+    <div class="viewfinder"><div class="frame"><div class="qr"></div></div><div class="hint">Hald koden inne i ramma</div></div>
+    <button class="btn primary" data-go="start-4">Kode funnen</button></div>`, auto: ["start-4", 1800] }),
+  "start-4": () => ({ body: `<div class="body"><span class="pill">✓ Heima-boksen er funnen</span><div class="big-ic">🔑</div>
+    <h2 class="t">Lag familienøkkelen</h2>
+    <p class="p">Nøkkelen blir verande på mobilen din, akkurat som husnøkkelen i lomma. Utan han kan ingen opne bileta og dokumenta dykkar. <strong>Ikkje ein gong vi.</strong></p>
+    <div class="card"><div class="muted">Du låser opp med Face ID. Du treng ikkje hugse noko passord.</div></div>
+    <div class="spacer"></div><button class="btn amber" data-go="start-5">Lag nøkkel med Face ID</button></div>` }),
+  "start-5": () => ({ body: `<div class="body center"><div class="faceid">🙂</div><p class="p">Ser på deg<span class="dots"></span></p></div>`, auto: ["start-6", 1500] }),
+  "start-6": () => ({ body: `<div class="body"><div class="big-ic">🔐</div>
+    <h2 class="t">Familienøkkelen er klar</h2><p class="p">Vil du ha eit nøkkelkort på papir i tillegg? Det er ein ekstra nøkkel du kan leggje i ein skuff, i tilfelle de mistar alle mobilane.</p>
+    <div class="spacer"></div><button class="btn primary" data-go="start-7" data-toast="Nøkkelkortet er klart til utskrift">Lag nøkkelkort</button>
+    <button class="btn ghost" data-go="start-7">Hopp over</button></div>` }),
+  "start-7": () => ({ body: `<div class="body"><h2 class="t">Heima tek vare på bileta dine</h2>
+    <p class="p">Du kan bruke mobilen som vanleg imens.</p>
+    <div class="card"><div class="row"><strong class="grow">2 418 av 8 312 bilete</strong><span class="muted">29 %</span></div><div class="bar"><span id="prog" style="width:29%"></span></div></div>
+    ${grid(9)}<div class="spacer"></div><button class="btn primary" data-go="home">Ferdig</button></div>`,
+    after: () => setTimeout(() => { const p = document.getElementById("prog"); if (p) p.style.width = "100%"; }, 200) }),
+
+  // Home (Bilete)
+  "home": () => ({ body: `<div class="body"><div class="row"><h2 class="t grow">Bilete</h2></div>
+    <span class="pill">✓ Alt er teke vare på</span>
+    <button class="search" data-go="search-1">🔍 Søk, til dømes «hytta 2019»</button>
+    <button class="card tap" data-go="kven-1"><div class="row"><span class="big-ic" style="width:48px;height:48px;font-size:22px;border-radius:14px">📚</span>
+      <div class="grow"><strong>Familiealbumet</strong><div class="muted">Delt med ${S.members.map(m => m.n).join(", ")}</div></div><span>›</span></div></button>
+    <strong>Nyleg</strong>${grid(12, 2)}</div>${tabbar("Bilete")}` }),
+
+  // 3. Finn bilete
+  "home-search": () => SCREENS["home"](),
+  "search-1": () => ({ body: `<div class="body"><button class="back" data-go="home">‹ Bilete</button>
+    <div class="search typed">🔍 <span id="typed"></span></div><p class="muted">Skriv som du snakkar. Heima forstår kven, kvar og når.</p></div>${tabbar("Bilete")}`,
+    after: () => typeInto("typed", "bestemor på hytta sommaren 2019", () => go("search-2")) }),
+  "search-2": () => ({ body: `<div class="body"><button class="back" data-go="home">‹ Bilete</button>
+    <div class="search typed">🔍 bestemor på hytta sommaren 2019</div>
+    <div class="chips"><span class="chip">👤 Bestemor</span><span class="chip">📍 Hytta</span><span class="chip">📅 Juni–august 2019</span></div>
+    <div class="row"><strong class="grow">Fann 23 bilete</strong><span class="muted">${S.selected.size ? S.selected.size + " valt" : "Trykk for å velje"}</span></div>
+    ${grid(15, 4, true)}
+    <button class="btn amber" data-go="search-3" ${S.selected.size ? "" : "disabled style='opacity:.5'"}>Legg til i Familiealbumet</button></div>${tabbar("Bilete")}` }),
+  "search-3": () => { const n = S.selected.size || 3; S.selected.clear(); return { body: `<div class="body center"><div class="big-ic">📚</div>
+    <h2 class="t">${n} bilete lagt til i Familiealbumet</h2><p class="p">No kan ${S.members.map(m => m.n).join(", ")} sjå dei.</p>
+    <div class="spacer"></div><button class="btn primary" data-go="home">Ferdig</button></div>${tabbar("Bilete")}` }; },
+
+  // 2. Inviter familien
+  "fam-1": () => ({ body: `<div class="body"><h2 class="t">Familien</h2>
+    <p class="p">Kvar vaksen har sin eigen nøkkel på mobilen sin.</p>
+    ${S.members.map(member).join("")}
+    <button class="btn primary" data-go="${S.members.length === 1 ? "fam-2" : S.members.length === 2 ? "fam-4" : "fam-1"}">${S.members.length < 3 ? "+ Inviter nokon" : "+ Inviter fleire"}</button></div>${tabbar("Familie")}` }),
+  "fam-2": () => ({ body: `<div class="body"><button class="back" data-go="fam-1">‹ Familien</button>
+    <h3 class="t">Kven vil du invitere?</h3>
+    <div class="card"><div class="muted">Namn</div><strong>Ola</strong></div>
+    <div class="chips"><span class="chip">Partnar</span><span class="chip" style="background:var(--card);border:1px solid var(--line);color:var(--muted)">Barn</span><span class="chip" style="background:var(--card);border:1px solid var(--line);color:var(--muted)">Besteforelder</span></div>
+    <div class="card"><div class="muted">Ola får sin eigen nøkkel på mobilen sin. Han ser Familiealbumet og det du vel å dele med han. Bileta dine elles er berre dine.</div></div>
+    <div class="spacer"></div><button class="btn amber" data-go="fam-3">Send invitasjon på SMS</button></div>${tabbar("Familie")}` }),
+  "fam-3": () => ({ body: `<div class="body center"><div class="big-ic">✉️</div><h2 class="t">Invitasjonen er send</h2>
+    <p class="p">Ola får ei lenkje på SMS og lagar nøkkelen sin med Face ID<span class="dots"></span></p></div>${tabbar("Familie")}`,
+    auto: ["fam-1", 1900], before: () => { if (!S.members.find(m => m.n === "Ola")) S.members.push({ n: "Ola", r: "Partnar", c: "#3E5468" }); } }),
+  "fam-4": () => ({ body: `<div class="body"><button class="back" data-go="fam-1">‹ Familien</button>
+    <h3 class="t">Inviter bestemor</h3>
+    <div class="card"><div class="muted">Namn</div><strong>Bestemor Anne</strong></div>
+    <div class="card"><div class="muted">Treng ho hjelp? Du kan setje opp mobilen hennar saman med henne. Det tek to minutt.</div></div>
+    <div class="spacer"></div><button class="btn amber" data-go="fam-5">Send invitasjon på SMS</button></div>${tabbar("Familie")}` }),
+  "fam-5": () => ({ body: `<div class="body center"><div class="big-ic">✉️</div><h2 class="t">Invitasjonen er send</h2>
+    <p class="p">Anne lagar nøkkelen sin<span class="dots"></span></p></div>${tabbar("Familie")}`,
+    auto: ["fam-1", 1700], before: () => { if (!S.members.find(m => m.n === "Anne")) S.members.push({ n: "Anne", r: "Bestemor", c: "#4E6B53" }); } }),
+
+  // 4. Forstå eit brev
+  "brev-1": () => ({ body: `<div class="body"><h2 class="t">Dokument</h2>
+    <button class="btn amber" data-go="brev-2">📷 Skann eit brev</button>
+    ${[["🧾", "Kvittering vaskemaskin", "14. mars 2024"], ["🏠", "Forsikringsbevis heim", "2. januar 2026"], ["📄", "Skattemelding 2025", "18. mars 2026"]].map(([i, t, d]) =>
+      `<button class="card tap" data-go="${t.startsWith("Kvittering") ? "spor-2" : "spor-1"}"><div class="row"><span style="font-size:22px">${i}</span><div class="grow"><strong>${t}</strong><div class="muted">${d}</div></div><span>›</span></div></button>`).join("")}
+  </div>${tabbar("Dokument")}` }),
+  "brev-2": () => ({ body: `<div class="body"><button class="back" data-go="brev-1">‹ Dokument</button><h3 class="t">Hald brevet inne i ramma</h3>
+    <div class="viewfinder"><div class="letter"><b style="font-size:11px;color:#17223A">NAV</b><i></i><i style="width:80%"></i><i></i><i style="width:60%"></i><i></i><i style="width:70%"></i></div><div class="hint">Brevet blir lese her på boksen, ikkje på nettet</div></div>
+    <button class="btn primary" data-go="brev-3">Ta bilete</button></div>${tabbar("Dokument")}` }),
+  "brev-3": () => ({ body: `<div class="body center"><div class="big-ic">📄</div><h3 class="t">Heima les brevet<span class="dots"></span></h3>
+    <p class="p">Ingenting forlèt huset.</p></div>${tabbar("Dokument")}`, auto: ["brev-4", 1800] }),
+  "brev-4": () => ({ body: `<div class="body"><button class="back" data-go="brev-1">‹ Dokument</button>
+    <div><div class="muted">Brev frå NAV · 12. november 2026</div><h3 class="t">Vedtak om foreldrepengar</h3></div>
+    <div class="sec"><h4>Kva er dette?</h4><p>NAV har godkjent søknaden din. Du har fått foreldrepengar i 49 veker.</p></div>
+    <div class="sec"><h4>Kva må du gjere?</h4><p>Ingenting, viss perioden stemmer. Vil du endre han, må du gi beskjed til NAV.</p></div>
+    <div class="deadline"><span class="muted">Frist for å endre</span><strong>3. desember</strong></div>
+    <button class="btn amber" data-go="brev-1" data-toast="Påminning sett: 26. november">Minn meg på det 26. november</button>
+    <button class="back" data-go="brev-src">Sjå kva svaret byggjer på ›</button>
+    <p class="muted">Assistenten kan ta feil. Originalbrevet er alltid fasit.</p></div>${tabbar("Dokument")}` }),
+  "brev-src": () => ({ body: `<div class="body"><button class="back" data-go="brev-4">‹ Forklaringa</button><h3 class="t">Originalbrevet</h3>
+    <div class="doc"><b>NAV · Vedtak</b><span>Vi har gått gjennom søknaden din om foreldrepengar.</span>
+      <span><mark>Du har fått innvilga foreldrepengar i 49 veker</mark> med 100 prosent dekning.</span>
+      <span>Perioden startar 6. januar 2027.</span>
+      <span><mark>Dersom du ønskjer å endre perioden, må du melde frå innan 3. desember 2026.</mark></span>
+      <span>Med venleg helsing, NAV Familie- og pensjonsytelser</span></div>
+    <p class="muted">Det gule er det Heima bygde svaret på. Brevet er eit døme.</p></div>${tabbar("Dokument")}` }),
+
+  // 5. Spør om dokumenta
+  "spor-1": () => ({ body: `<div class="body"><h2 class="t">Spør Heima</h2>
+    <p class="p">Heima kjenner berre dykkar bilete og dokument. Alt skjer på boksen heime.</p>
+    ${["Når går garantien på vaskemaskina ut?", "Kva for forsikringar har vi?", "Vis bilete frå 17. mai i fjor"].map((q, i) =>
+      `<button class="card tap" data-go="${i === 0 ? "spor-2" : i === 2 ? "home" : "spor-1"}">${q}</button>`).join("")}
+  </div>${tabbar("Spør")}` }),
+  "spor-2": () => ({ body: `<div class="body"><button class="back" data-go="spor-1">‹ Spør Heima</button>
+    <div class="bubble me">Når går garantien på vaskemaskina ut?</div>
+    <div class="bubble heima" id="ans"><span class="dots">Leitar i dokumenta</span></div></div>${tabbar("Spør")}`,
+    after: () => setTimeout(() => { const a = document.getElementById("ans"); if (a) a.innerHTML =
+      `Reklamasjonsretten på vaskemaskina varer til <strong>14. mars 2029</strong>, fem år etter at du kjøpte ho. Produsentgarantien gjekk ut 14. mars 2026.<br><button class="src back" data-go="brev-1">🧾 Kvittering · 14. mars 2024 ›</button>`; wire(); }, 1300) }),
+
+  // 6. Kven kan sjå dette?
+  "kven-1": () => ({ body: `<div class="body" style="padding:0">
+    <div style="height:56%;background:${PH[0]};position:relative"><button class="back" data-go="home" style="position:absolute;left:16px;top:12px;color:#fff">‹ Bilete</button></div>
+    <div style="padding:16px 20px;display:grid;gap:12px"><div><strong>Hytta, juli 2019</strong><div class="muted">Bestemor, Kari · I Familiealbumet</div></div>
+    <button class="btn primary" data-sheet="kven">👁 Kven kan sjå dette?</button></div></div>${tabbar("Bilete")}` }),
+  "kven-export": () => ({ body: `<div class="body"><button class="back" data-go="kven-1">‹ Tilbake</button>
+    <div class="big-ic">📦</div><h2 class="t">Ta med deg alt</h2>
+    <p class="p">Du kan kopiere alle bileta og dokumenta til ein vanleg harddisk eller ei anna teneste, når som helst. Det er dykkar.</p>
+    <div class="card"><div class="row"><span class="grow">8 312 bilete · 214 dokument</span><strong>412 GB</strong></div></div>
+    <div class="spacer"></div><button class="btn primary" data-go="kven-1" data-toast="Kopieringa har starta. Vi seier frå når ho er ferdig.">Start kopiering</button></div>${tabbar("Bilete")}` }),
+};
+
+const SHEETS = {
+  kven: () => `<div class="sheet-bg" data-close><div class="sheet" role="dialog" aria-label="Kven kan sjå dette?">
+    <h3 class="t">Kven kan sjå dette?</h3>
+    <p class="p">Biletet ligg i Familiealbumet.</p>
+    ${S.members.map(m => `<div class="row"><span class="avatar" style="background:${m.c};width:32px;height:32px;font-size:13px">${m.n[0]}</span><span class="grow">${m.n}</span><span class="muted">${m.r}</span></div>`).join("")}
+    <div class="card" style="background:var(--ok-soft);border-color:transparent"><strong style="color:var(--ok)">Ingen andre. Ikkje ein gong Heima.</strong>
+      <span class="muted">Tryggleikskopien i Noreg er låst med familienøkkelen.</span></div>
+    <div class="card"><span class="muted">Heima-lovnaden</span><strong>«Boksen verkar alltid, og alt er alltid ditt.»</strong></div>
+    <button class="btn ghost" data-go="kven-export">Ta med deg alt</button></div></div>`,
+};
+
+// ---------- engine ----------
+let cur = "start-1", timer = null;
+function go(id) {
+  clearTimeout(timer); S.sheet = null;
+  const s = SCREENS[id]; if (!s) return;
+  cur = id;
+  s.before?.();
+  const v = s();
+  const scr = document.getElementById("screen");
+  scr.innerHTML = `<div class="island"></div><div class="status"><span>21:14</span><span>5G ▮</span></div>${v.body}${S.toast ? `<div class="toast">${S.toast}</div>` : ""}`;
+  if (S.toast) { const t = S.toast; setTimeout(() => { if (S.toast === t) { S.toast = ""; scr.querySelector(".toast")?.remove(); } }, 2400); }
+  if (v.auto) timer = setTimeout(() => go(v.auto[0]), v.auto[1]);
+  v.after?.();
+  wire();
+  const f = FLOW_OF(id);
+  document.querySelectorAll("#flows button").forEach((b, i) => b.setAttribute("aria-current", i === f));
+}
+function wire() {
+  const scr = document.getElementById("screen");
+  scr.querySelectorAll("[data-go]").forEach(el => el.onclick = e => { e.stopPropagation(); if (el.dataset.toast) S.toast = el.dataset.toast; go(el.dataset.go); });
+  scr.querySelectorAll("[data-sel]").forEach(el => el.onclick = () => { const i = +el.dataset.sel; S.selected.has(i) ? S.selected.delete(i) : S.selected.add(i); go(cur); });
+  scr.querySelectorAll("[data-sheet]").forEach(el => el.onclick = () => openSheet(el.dataset.sheet));
+}
+function openSheet(name) {
+  const scr = document.getElementById("screen");
+  scr.insertAdjacentHTML("beforeend", SHEETS[name]());
+  const bg = scr.querySelector(".sheet-bg");
+  bg.onclick = e => { if (e.target === bg) bg.remove(); };
+  wire();
+}
+function typeInto(id, text, done) {
+  let i = 0; const el = document.getElementById(id);
+  const tick = () => { if (!document.getElementById(id) || cur !== "search-1") return; el.textContent = text.slice(0, ++i); if (i < text.length) timer = setTimeout(tick, 45); else timer = setTimeout(done, 600); };
+  tick();
+}
+
+document.getElementById("flows").innerHTML = FLOWS.map(([id, t, d], i) =>
+  `<button data-flow="${id}"><span>${i + 1}</span><span>${t}<small>${d}</small></span></button>`).join("");
+document.querySelectorAll("[data-flow]").forEach(b => b.onclick = () => go(b.dataset.flow));
+document.getElementById("reset").onclick = () => { S.members = [{ n: "Kari", r: "Deg", c: "#B5690F" }]; S.selected.clear(); go("start-1"); };
+go("start-1");
+</script>

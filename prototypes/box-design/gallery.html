@@ -1,0 +1,44 @@
+<title>Heima-boksen Concept Images</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@600;700&family=Public+Sans:wght@400;600&display=swap">
+<style>
+/* Gallery of the seven Blender concept renders, direction A «Boka». */
+:root { --bg: #EEF0F1; --ink: #17223A; --muted: #556074; --line: #D6DAE0; --amber: #A9620F;
+  --display: "Familjen Grotesk", "Helvetica Neue", Arial, sans-serif; --body: "Public Sans", system-ui, sans-serif; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #0E1522; --ink: #E8EBF0; --muted: #9AA5B8; --line: #27334B; --amber: #F0A43A; color-scheme: dark; } }
+:root[data-theme="dark"] { --bg: #0E1522; --ink: #E8EBF0; --muted: #9AA5B8; --line: #27334B; --amber: #F0A43A; color-scheme: dark; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); margin: 0; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 40px max(16px, env(safe-area-inset-right, 0px)) 56px max(16px, env(safe-area-inset-left, 0px)); display: grid; gap: 28px; }
+h1 { font-family: var(--display); font-size: clamp(30px, 4.5vw, 46px); margin: 0; line-height: 1.1; }
+.lede { color: var(--muted); max-width: 64ch; line-height: 1.6; margin: 0; }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+figure { margin: 0; display: grid; gap: 8px; min-width: 0; }
+figure.wide { grid-column: 1 / -1; }
+.img { position: relative; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); }
+.img img { display: block; width: 100%; height: auto; }
+.cap { position: absolute; left: 10px; bottom: 10px; font-size: 12px; background: rgba(0,0,0,.5); color: #fff; padding: 2px 8px; border-radius: 6px; }
+figcaption { font-size: 15px; display: flex; gap: 10px; flex-wrap: wrap; align-items: baseline; }
+figcaption b { font-family: var(--display); font-size: 17px; }
+figcaption span { color: var(--muted); }
+@media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+</style>
+<div class="wrap">
+  <h1>Heima-boksen · retning A «Boka»</h1>
+  <p class="lede">Sju konseptbilete laga som 3D-modell i Blender. Eik, på storleik med ei bok, med ei smal rav-farga lysstripe framme. Kvar bilete er merkt «Konseptbilete (3D-illustrasjon)», slik det skal stå på nettstaden.</p>
+  <div class="grid">
+    <figure class="wide"><div class="img"><img src="img/heima-boksen-hero.jpg" alt="Heima-boksen i eik, sett skrått framanfrå"><span class="cap">Konseptbilete (3D-illustrasjon)</span></div>
+      <figcaption><b>1 · Produktbilete</b><span>Hero på framsida og øvst på /heima-boksen</span></figcaption></figure>
+    <figure><div class="img"><img src="img/heima-boksen-detail.jpg" alt="Nærbilete av lysstripa og eiketreet"><span class="cap">Konseptbilete (3D-illustrasjon)</span></div>
+      <figcaption><b>2 · Detalj</b><span>«Lyset» på /heima-boksen</span></figcaption></figure>
+    <figure><div class="img"><img src="img/heima-boksen-back.jpg" alt="Baksida med straumkontakt, nettverkskontakt og heima-logo"><span class="cap">Konseptbilete (3D-illustrasjon)</span></div>
+      <figcaption><b>5 · Baksida</b><span>«Kva er inni?»</span></figcaption></figure>
+    <figure class="wide"><div class="img"><img src="img/heima-boksen-shelf-evening.jpg" alt="Heima-boksen mellom bøker i ei bokhylle, kveld"><span class="cap">Konseptbilete (3D-illustrasjon)</span></div>
+      <figcaption><b>3 · Bokhylla, kveld</b><span>«Set han i bokhylla. Ferdig.»</span></figcaption></figure>
+    <figure class="wide"><div class="img"><img src="img/heima-boksen-shelf-day.jpg" alt="Heima-boksen mellom bøker i ei bokhylle, dagslys"><span class="cap">Konseptbilete (3D-illustrasjon)</span></div>
+      <figcaption><b>4 · Bokhylla, dag</b><span>/heima-boksen</span></figcaption></figure>
+    <figure><div class="img"><img src="img/heima-boksen-phone.jpg" alt="Heima-boksen på eit bord med ein mobil som viser Heima-appen"><span class="cap">Konseptbilete (3D-illustrasjon)</span></div>
+      <figcaption><b>6 · Boksen og appen</b><span>Assistent-seksjonen, /heima-appen</span></figcaption></figure>
+    <figure><div class="img"><img src="img/heima-boksen-size.jpg" alt="Heima-boksen ved sida av ei bok og ein kaffikopp"><span class="cap">Konseptbilete (3D-illustrasjon)</span></div>
+      <figcaption><b>7 · Storleik</b><span>«Tal du forstår»</span></figcaption></figure>
+  </div>
+</div>

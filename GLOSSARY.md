@@ -82,7 +82,11 @@ _On the site_: familiemedlem
 
 ## Funnel
 
+**Demand test**:
+The campaign and website that measure whether Buyers want Heima before it is built. Ends in a go/no-go decision.
+_Avoid_: Fake door, MVP, pilot, beta
+
 **Reservation**:
-A non-binding signal from a Buyer that they want Heima when it launches. Carries no payment or obligation.
+A non-binding signal from a Buyer that they want Heima when it launches. Carries no payment or obligation. It counts only once the Buyer has confirmed it by email.
 _Avoid_: Pre-order, order, waitlist signup
 _On the site_: reservasjon, always with «heilt uforpliktande»

@@ -94,7 +94,13 @@ Three reasons a family would buy:
 - Measure: weekly active use, how many photos get uploaded, support requests per household, and whether they would keep paying.
 
 ### Go/no-go criteria
-- At least **5% conversion** on the fake door.
+
+**Demand test** (decided in [Reservation funnel and success metrics](https://github.com/randax/produktutvikling/issues/10)). All of these must be met:
+- At least **5%** of unique visitors from the campaign link make a **confirmed** Reservation.
+- At least **40%** of confirmed reservers answer «Ja» to the price question, and at most **30%** answer «Nei, det er for dyrt».
+- At least **1,000 campaign visitors** before the result is read. Below that, the result is inconclusive, not a no-go.
+
+**Pilot** (after the demand test):
 - Norwegian AI quality that the pilot households call **"good enough"**.
 - **Fewer than one support request** per household per month.
 

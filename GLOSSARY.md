@@ -19,6 +19,7 @@ _Avoid_: Client, Heima-app (without the definite ending)
 **Subscription**:
 The small monthly payment a Household makes on top of buying Heima-boksen. It covers the backup copy in Norway, updates and the assistant.
 _Avoid_: Plan, membership, licence
+_On the site_: abonnementet
 
 ## Promise
 
@@ -33,18 +34,22 @@ _Avoid_: The cloud, big tech (when Jottacloud is included)
 **Household key**:
 The secret that encrypts the Household's backup copy. Only the Household's Members can unlock it; Heima never holds it.
 _Avoid_: Password, master key, encryption key
+_On the site_: familienøkkelen
 
 **Passkey**:
 A Member's personal way to unlock the Household key on their own phone, using Face ID or a fingerprint. Every adult Member has one.
 _Avoid_: Login, password, PIN
+_On the site_: nøkkelen på mobilen
 
 **Key card**:
 An optional paper copy of the Household key, kept at home as a last resort if every Passkey is lost.
 _Avoid_: Recovery code, backup key
+_On the site_: nøkkelkortet
 
 **Continuity guarantee**:
 Heima's public, contractual promise that Heima-boksen keeps working locally and all data can be exported, even if the Subscription ends or Heima shuts down.
 _Avoid_: End-of-life policy, warranty
+_On the site_: Heima-lovnaden («Boksen verkar alltid, og alt er alltid ditt.»)
 
 ## People
 
@@ -58,10 +63,12 @@ _Avoid_: Customer, user, lead
 
 **Member**:
 Anyone in a Household with their own access to Heima, including the Buyer, grandparents and children.
-_Avoid_: User, family member
+_Avoid_: User, "family member" (in English internal docs)
+_On the site_: familiemedlem
 
 ## Funnel
 
 **Reservation**:
 A non-binding signal from a Buyer that they want Heima when it launches. Carries no payment or obligation.
 _Avoid_: Pre-order, order, waitlist signup
+_On the site_: reservasjon, always with «heilt uforpliktande»

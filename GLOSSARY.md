@@ -16,6 +16,15 @@ _Avoid_: Server, NAS, router, hub
 The phone app Members use to back up, find and ask about their photos and documents. Sold to the Buyer.
 _Avoid_: Client, Heima-app (without the definite ending)
 
+**Private space**:
+A Member's own photos and documents, visible only to that Member unless they share something. Everything a Member adds lands here by default.
+_Avoid_: Account, personal folder, my files
+
+**Family album**:
+The shared collection of photos that every Member of the Household can see and add to.
+_Avoid_: Shared library, shared folder, common album
+_On the site_: Familiealbumet
+
 **Subscription**:
 The small monthly payment a Household makes on top of buying Heima-boksen. It covers the backup copy in Norway, updates and the assistant.
 _Avoid_: Plan, membership, licence

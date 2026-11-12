@@ -66,7 +66,7 @@ Three reasons a family would buy:
 | Decision | Recommendation |
 |---|---|
 | Separate box or built into the router? | **Separate box.** Router replacement cycles and specs are too limiting for AI. It can integrate with the router later. |
-| What does the MVP include? | **Photos first, AI second.** Photo backup is the purchase reason people understand; the AI makes it special. Document help comes in v1.5. |
+| What does the launch include? | **Decided** in [Launch features and prototype flows](https://github.com/randax/produktutvikling/issues/9): photo backup and Norwegian search, letter help with deadline reminders, questions about the family's documents, Private spaces plus a shared Family album, and access away from home. No general chat. Phone app on iPhone and Android. |
 | Build or reuse? | **Build on open source** (Immich for photos, llama.cpp/Ollama for AI) with our own app and design on top. ⚠️ Immich is AGPL, so get a legal assessment. |
 | What happens if there's a fire or theft? | **A 3-2-1 backup is required:** an encrypted copy in a Norwegian data centre, with the key held only by the customer. Without this the product doesn't work. |
 | Language model | Test the Norwegian models from the National Library and UiO's language technology group against small international models. **Norwegian quality is a go/no-go criterion.** |

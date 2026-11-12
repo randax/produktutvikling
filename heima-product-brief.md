@@ -61,7 +61,7 @@ Three reasons a family would buy:
 
 ## 5. The decisions to make first
 
-*Original proposals. Business model since decided: the Buyer buys Heima-boksen (instalments allowed) and pays a small monthly Subscription; the price is set in the Pricing ticket. See the [map](https://github.com/randax/produktutvikling/issues/1) for current decisions.*
+*Original proposals. Business model and price since decided in [Pricing of Heima-boksen and the Subscription](https://github.com/randax/produktutvikling/issues/8): the Buyer buys Heima-boksen and pays a monthly Subscription. See the [map](https://github.com/randax/produktutvikling/issues/1) for current decisions.*
 
 | Decision | Recommendation |
 |---|---|
@@ -70,7 +70,7 @@ Three reasons a family would buy:
 | Build or reuse? | **Build on open source** (Immich for photos, llama.cpp/Ollama for AI) with our own app and design on top. ⚠️ Immich is AGPL, so get a legal assessment. |
 | What happens if there's a fire or theft? | **A 3-2-1 backup is required:** an encrypted copy in a Norwegian data centre, with the key held only by the customer. Without this the product doesn't work. |
 | Language model | Test the Norwegian models from the National Library and UiO's language technology group against small international models. **Norwegian quality is a go/no-go criterion.** |
-| Price hypothesis | About 149–199 kr/month including the box, 2 TB and the backup. Bundled with internet it should cost about the same as iCloud 2 TB. |
+| Price | **Decided:** two Packages. Heima 2 TB: box 7,990 kr + 89 kr/mnd (recommended). Heima 4 TB: box 9,490 kr + 129 kr/mnd. Assistant in both, backup of everything on the box, no discounts. Hardware sized to fit the price (16–24 GB, gemma-4-12B). |
 
 ## 6. Biggest risks (test these first)
 

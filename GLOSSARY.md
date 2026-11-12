@@ -21,6 +21,11 @@ The small monthly payment a Household makes on top of buying Heima-boksen. It co
 _Avoid_: Plan, membership, licence
 _On the site_: abonnementet
 
+**Package**:
+One storage size of Heima-boksen together with its matching Subscription price. There are two: Heima 2 TB and Heima 4 TB.
+_Avoid_: Plan, tier, bundle, edition
+_On the site_: pakke ("Heima 2 TB", "Heima 4 TB")
+
 ## Promise
 
 **Digital sovereignty**:

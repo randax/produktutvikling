@@ -1,0 +1,438 @@
+<title>Heima Website Prototype</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Public+Sans:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+/* PROTOTYPE – throwaway. Three structurally different landing pages for Heima, switch with ← → or the bar at the bottom. */
+:root {
+  --bg: #F1F2F1; --surface: #FFFFFF; --ink: #17223A; --muted: #556074; --line: #D6DAE0;
+  --amber: #A9620F; --amber-soft: #F5E5CC; --night: #141D2E; --night-ink: #ECEEF2; --night-muted: #9DA8BB;
+  --glow: #F2A63C; --flag: #B4232A; --flag-soft: #FBE3E3;
+  --display: "Familjen Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --body: "Public Sans", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0E1522; --surface: #162034; --ink: #E8EBF0; --muted: #9AA5B8; --line: #27334B;
+  --amber: #F0A43A; --amber-soft: #33281A; --night: #0A101B; --flag: #FF8A8F; --flag-soft: #3A1D22; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0E1522; --surface: #162034; --ink: #E8EBF0; --muted: #9AA5B8; --line: #27334B;
+  --amber: #F0A43A; --amber-soft: #33281A; --night: #0A101B; --flag: #FF8A8F; --flag-soft: #3A1D22; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.6; margin: 0; padding-bottom: 90px; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.narrow { max-width: 720px; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.12; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(38px, 6.4vw, 68px); letter-spacing: -0.02em; }
+h2 { font-size: clamp(28px, 4vw, 40px); letter-spacing: -0.01em; }
+h3 { font-size: 20px; }
+p { margin: 0; }
+a { color: var(--amber); }
+section { padding-block: 72px; }
+.stack { display: grid; gap: 18px; }
+.eyebrow { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; color: var(--amber); }
+.lede { font-size: 19px; color: var(--muted); max-width: 58ch; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 22px; border-radius: 999px; font-weight: 600; text-decoration: none; border: 0; cursor: pointer; font-family: var(--body); font-size: 16px; }
+.btn-primary { background: var(--amber); color: #fff; }
+:root[data-theme="dark"] .btn-primary { color: #1A1206; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn-primary { color: #1A1206; } }
+.btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+.btn:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid var(--glow); outline-offset: 2px; }
+.row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+/* legal + prototype flags */
+.concept { background: var(--night); color: var(--night-ink); font-size: 14px; }
+.concept .wrap { padding-block: 10px; }
+.flag { display: inline-block; font-size: 12px; font-weight: 600; color: var(--flag); background: var(--flag-soft); border-radius: 6px; padding: 2px 8px; }
+
+/* header */
+header.site { border-bottom: 1px solid var(--line); background: var(--bg); }
+header.site .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; flex-wrap: wrap; }
+.logo { font-family: var(--display); font-weight: 700; font-size: 24px; color: var(--ink); text-decoration: none; display: inline-flex; gap: 8px; align-items: center; }
+.logo::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--glow); box-shadow: 0 0 12px var(--glow); }
+nav.site { display: flex; gap: 20px; font-size: 15px; flex-wrap: wrap; }
+nav.site a { color: var(--muted); text-decoration: none; }
+
+/* image placeholder */
+.img-ph { background: linear-gradient(160deg, #26324A, #141D2E); border-radius: 18px; color: var(--night-muted); display: grid; place-items: center; text-align: center; padding: 24px; font-size: 14px; position: relative; min-height: 280px; }
+.img-ph .glowbar { width: 34%; height: 6px; border-radius: 6px; background: #FFC871; box-shadow: 0 0 22px 8px rgba(242,166,60,.5); margin-bottom: 18px; }
+.img-ph .cap { position: absolute; left: 12px; bottom: 10px; font-size: 12px; background: rgba(0,0,0,.45); color: #fff; padding: 2px 8px; border-radius: 6px; }
+
+/* sections */
+.band-night { background: var(--night); color: var(--night-ink); }
+.band-night .lede, .band-night .muted { color: var(--night-muted); }
+.quote { font-family: var(--display); font-size: clamp(26px, 3.6vw, 40px); line-height: 1.25; max-width: 30ch; }
+.grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+.grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; align-items: center; }
+.reason { display: grid; gap: 10px; align-content: start; }
+.reason .num { font-family: var(--display); color: var(--amber); font-weight: 700; }
+.reason p, .muted { color: var(--muted); }
+.steps { display: grid; gap: 0; counter-reset: s; }
+.step { display: grid; grid-template-columns: 56px 1fr; gap: 16px; padding-block: 18px; border-top: 1px solid var(--line); }
+.step::before { counter-increment: s; content: counter(s); font-family: var(--display); font-size: 28px; color: var(--amber); font-weight: 700; }
+
+.chat { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 20px; display: grid; gap: 12px; }
+.bubble { border-radius: 16px; padding: 12px 16px; max-width: 92%; font-size: 15.5px; }
+.bubble.me { background: var(--amber-soft); justify-self: end; }
+.bubble.heima { background: var(--bg); border: 1px solid var(--line); }
+.bubble .src { display: block; margin-top: 8px; font-size: 13px; color: var(--amber); font-weight: 600; }
+.small { font-size: 13.5px; color: var(--muted); }
+
+.promise { border: 1px solid var(--line); border-radius: 20px; padding: 32px; background: var(--surface); display: grid; gap: 16px; }
+.promise blockquote { margin: 0; font-family: var(--display); font-size: clamp(24px, 3vw, 32px); color: var(--amber); }
+.checks { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.checks li { padding-left: 28px; position: relative; }
+.checks li::before { content: "→"; position: absolute; left: 0; color: var(--amber); font-weight: 700; }
+
+.table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; min-width: 720px; font-size: 15px; }
+th, td { text-align: left; padding: 14px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+thead th { font-family: var(--display); font-size: 16px; }
+th.heima, td.heima { background: var(--amber-soft); font-weight: 600; }
+tbody th { font-weight: 600; width: 22%; }
+tr:last-child td, tr:last-child th { border-bottom: 0; }
+
+.packages { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.pkg { border: 1px solid var(--line); border-radius: 20px; padding: 28px; background: var(--surface); display: grid; gap: 12px; align-content: start; }
+.pkg.rec { border: 2px solid var(--amber); }
+.pkg .price { font-family: var(--display); font-size: 34px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.pkg .sub { font-family: var(--display); font-size: 20px; font-variant-numeric: tabular-nums; }
+.pill { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--amber); background: var(--amber-soft); border-radius: 999px; padding: 3px 10px; justify-self: start; }
+
+details { border-top: 1px solid var(--line); padding-block: 16px; }
+details:last-child { border-bottom: 1px solid var(--line); }
+summary { font-weight: 600; cursor: pointer; font-size: 18px; }
+details p { margin-top: 10px; color: var(--muted); }
+
+form.reserve { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 28px; display: grid; gap: 22px; }
+fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 8px; }
+legend { font-weight: 600; margin-bottom: 8px; padding: 0; }
+.opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.opt input { position: absolute; opacity: 0; pointer-events: none; }
+.opt span { display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; font-size: 15px; background: var(--bg); }
+.opt input:checked + span { background: var(--amber-soft); border-color: var(--amber); font-weight: 600; }
+.opt input:focus-visible + span { outline: 3px solid var(--glow); outline-offset: 2px; }
+label.field { display: grid; gap: 6px; font-weight: 600; }
+label.field input { font: inherit; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); width: 100%; }
+.hint { font-weight: 400; font-size: 14px; color: var(--muted); }
+.consent { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; font-size: 15.5px; }
+.consent input { width: 18px; height: 18px; margin-top: 4px; }
+.done { background: var(--amber-soft); border-radius: 16px; padding: 24px; display: grid; gap: 8px; }
+
+footer.site { border-top: 1px solid var(--line); }
+footer.site .wrap { padding-block: 40px; display: grid; gap: 12px; font-size: 14px; color: var(--muted); }
+footer.site .sign { font-family: var(--display); font-size: 22px; color: var(--ink); }
+
+/* hero variants */
+.hero-a .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; padding-block: 64px; }
+.hero-b { background: var(--night); color: var(--night-ink); }
+.hero-b .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; padding-block: 64px; }
+.hero-b .lede { color: var(--night-muted); }
+.hero-b .btn-ghost { color: var(--night-ink); border-color: #3A4660; }
+.mini { display: grid; gap: 0; border: 1px solid #2E3A54; border-radius: 16px; overflow: hidden; }
+.mini div { display: grid; grid-template-columns: 1fr auto; gap: 16px; padding: 14px 18px; border-bottom: 1px solid #2E3A54; font-size: 16px; }
+.mini div:last-child { border-bottom: 0; background: rgba(242,166,60,.14); color: var(--glow); font-weight: 600; }
+.mini .h { background: rgba(255,255,255,.04); font-family: var(--display); font-size: 18px; }
+.hero-c .wrap { display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center; padding-block: 56px; }
+.phone { width: 300px; max-width: 100%; aspect-ratio: 9 / 19; border-radius: 44px; background: #0B0F18; padding: 12px; box-shadow: 0 30px 80px rgba(20,29,46,.35); }
+.screen { width: 100%; height: 100%; border-radius: 34px; background: #F7F7F5; color: #17223A; padding: 44px 18px 18px; display: grid; align-content: start; gap: 12px; font-size: 14px; overflow: hidden; }
+.screen h4 { margin: 0; font-family: var(--display); font-size: 20px; }
+.screen .card { background: #fff; border: 1px solid #E2E4E8; border-radius: 14px; padding: 12px; }
+.screen .search { background: #fff; border: 1px solid #E2E4E8; border-radius: 999px; padding: 10px 14px; color: #556074; }
+.thumbs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+.thumbs span { aspect-ratio: 1; border-radius: 6px; background: linear-gradient(140deg, #C9B79C, #7C8B9C); }
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.tabs button { font: inherit; font-size: 14px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 8px 14px; cursor: pointer; }
+.tabs button[aria-selected="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+/* prototype switcher */
+.switcher { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 50; display: flex; align-items: center; gap: 4px; background: #111; color: #fff; border-radius: 999px; padding: 6px; box-shadow: 0 10px 30px rgba(0,0,0,.35); font: 600 14px/1 var(--body); max-width: calc(100vw - 32px); }
+.switcher button { background: #2A2A2A; color: #fff; border: 0; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; font-size: 18px; flex: none; }
+.switcher .label { padding: 0 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+@media (max-width: 860px) {
+  .hero-a .wrap, .hero-b .wrap, .hero-c .wrap, .grid2 { grid-template-columns: 1fr; }
+  .grid3, .packages { grid-template-columns: 1fr; }
+  .hero-c .phone { justify-self: center; }
+  section { padding-block: 52px; }
+  nav.site { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+
+<div id="app"></div>
+<div class="switcher" role="group" aria-label="Prototype: byt variant">
+  <button id="prev" aria-label="Førre variant">←</button>
+  <span class="label" id="vlabel"></span>
+  <button id="next" aria-label="Neste variant">→</button>
+</div>
+
+<script>
+// ---------- shared copy (from docs/messaging.md) ----------
+const H1 = "Ingen andre kan sjå bileta dine. Ikkje ein gong vi.";
+const SUB = "Heima-boksen tek vare på bileta og dokumenta til familien, heime hos deg. Med ein privat assistent som hjelper deg å finne fram og forstå breva frå NAV og banken. Du treng ikkje kunne noko om teknologi.";
+const CTA = `<a class="btn btn-primary" href="#reserver">Reserver – heilt uforpliktande</a>`;
+
+const concept = () => `
+<div class="concept"><div class="wrap">
+  <strong>Heima er eit konsept under utvikling.</strong> Produktet finst ikkje enno. Utsjånad, storleik, funksjonar og pris kan endre seg, og det er ikkje sikkert Heima kjem. <a href="#reserver" style="color:var(--glow)">Ein reservasjon</a> er heilt uforpliktande.
+</div></div>`;
+
+const header = () => `
+<header class="site"><div class="wrap">
+  <a class="logo" href="#">Heima</a>
+  <nav class="site" aria-label="Hovudmeny">
+    <a href="#slik">Slik verkar det</a><a href="#personvern">Personvern</a><a href="#pris">Pris</a><a href="#sporsmal">Spørsmål</a>
+  </nav>
+  <a class="btn btn-primary" href="#reserver" style="padding:10px 18px">Reserver</a>
+</div></header>`;
+
+const img = (text, h = 360) => `
+<div class="img-ph" style="min-height:${h}px"><div><div class="glowbar" style="margin-inline:auto"></div>${text}</div>
+<span class="cap">Konseptbilete (3D-illustrasjon)</span></div>`;
+
+const album = () => `
+<section class="band-night"><div class="wrap stack">
+  <p class="eyebrow" style="color:var(--glow)">Familiealbumet, berre smartare</p>
+  <p class="quote">Før stod familiealbumet i bokhylla. Ingen andre hadde det. Heima-boksen er det same, berre smartare.</p>
+</div></section>`;
+
+const reasons = () => `
+<section id="personvern"><div class="wrap stack" style="gap:40px">
+  <h2>Tre grunnar til å velje Heima</h2>
+  <div class="grid3">
+    <div class="reason"><span class="num">01</span><h3>Berre familien har nøkkelen</h3>
+      <p>Bileta og dokumenta ligg heime hos deg. Tryggleikskopien i Noreg er låst med nøkkelen på mobilen din, og ingen andre kan opne han.</p></div>
+    <div class="reason"><span class="num">02</span><h3>Ein assistent som kan lese breva dine</h3>
+      <p>Ta bilete av brevet frå NAV eller Skatteetaten, så forklarer Heima kva det betyr og når fristen er. Ingenting forlèt huset.</p></div>
+    <div class="reason"><span class="num">03</span><h3>Alle minna, lette å finne</h3>
+      <p>Bileta frå mobilane i familien vert tekne vare på automatisk. Skriv «bestemor på hytta sommaren 2019», så finn Heima dei.</p></div>
+  </div>
+</div></section>`;
+
+const how = () => `
+<section id="slik"><div class="wrap grid2">
+  <div class="stack">
+    <p class="eyebrow">Slik skal Heima fungere</p>
+    <h2>Set han i bokhylla. Ferdig.</h2>
+    <div class="steps">
+      <div class="step"><p><strong>Set Heima-boksen i straumen</strong> og kople han til ruteren. Han verkar med alle internettleverandørar.</p></div>
+      <div class="step"><p><strong>Skann koden med mobilen</strong> og lag familienøkkelen med Face ID eller fingeravtrykk.</p></div>
+      <div class="step"><p><strong>Inviter familien.</strong> Kvar vaksen får sin eigen nøkkel, akkurat som husnøkkelen.</p></div>
+    </div>
+  </div>
+  ${img("Heima-boksen i bokhylla", 420)}
+</div></section>`;
+
+const assistant = () => `
+<section><div class="wrap grid2">
+  <div class="stack">
+    <p class="eyebrow">Assistenten</p>
+    <h2>Han kan lese breva dine, fordi han aldri sender noko ut.</h2>
+    <p class="lede">Du ville aldri late Google sin KI lese breva frå NAV, banken og legen. Heima sin assistent kan, fordi han bur heime hos deg.</p>
+  </div>
+  <div class="chat" aria-label="Døme på samtale med assistenten">
+    <div class="bubble me">📄 Brev frå NAV · <em>Kva betyr dette?</em></div>
+    <div class="bubble heima">Dette er eit vedtak om foreldrepengar. Du har fått 49 veker. Vil du endre perioden, må du gi beskjed innan <strong>3. desember</strong>. Skal eg minne deg på det ei veke før?
+      <span class="src">Sjå kva svaret byggjer på →</span></div>
+    <div class="bubble me">Ja takk</div>
+    <p class="small">Døme. Assistenten kan ta feil, så originalbrevet er alltid fasit.</p>
+  </div>
+</div></section>`;
+
+const promise = () => `
+<section><div class="wrap narrow">
+  <div class="promise">
+    <p class="eyebrow">Heima-lovnaden</p>
+    <blockquote>«Boksen verkar alltid, og alt er alltid ditt.»</blockquote>
+    <p>Om du sluttar å betale, eller om vi legg ned, held Heima-boksen fram med å verke heime hos deg. Du kan alltid ta med deg alle bileta og dokumenta.</p>
+    <p><strong>Dette skal vi gjere før lansering:</strong></p>
+    <ul class="checks">
+      <li>Publisere programvaren i boksen som open kjeldekode, så kven som helst kan sjekke han.</li>
+      <li>La eit uavhengig selskap teste tryggleiken, og publisere rapporten.</li>
+      <li>Skrive Heima-lovnaden inn i avtalen din.</li>
+    </ul>
+  </div>
+</div></section>`;
+
+const compare = () => `
+<section id="samanlikning"><div class="wrap stack">
+  <h2>Kven kan sjå bileta dine?</h2>
+  <p class="row"><span class="flag">Utkast: fakta må stadfestast av juridisk før publisering</span></p>
+  <div class="table-scroll"><table>
+    <thead><tr><th></th><th>iCloud</th><th>Google Foto</th><th>Jottacloud</th><th class="heima">Heima</th></tr></thead>
+    <tbody>
+      <tr><th>Kven kan sjå bileta?</th><td>Apple, om du ikkje har slått på «Avansert datavern»</td><td>Google</td><td>Jottacloud</td><td class="heima">Berre familien</td></tr>
+      <tr><th>Kvar er dei lagra?</th><td>Hos Apple. Ikkje lova lagra i Noreg</td><td>Hos Google. Kan vere utanfor Noreg</td><td>Hos Jottacloud, i Noreg</td><td class="heima">Heime hos deg, med ein låst kopi i Noreg</td></tr>
+      <tr><th>Kva skjer om du sluttar å betale?</th><td>Du går ned til 5 GB gratis lagring</td><td>Du går ned til 15 GB gratis lagring</td><td><span class="flag">må sjekkast</span></td><td class="heima">Boksen verkar vidare, og alt er ditt</td></tr>
+      <tr><th>Assistent for breva dine</th><td>Nei</td><td>Nei</td><td>Nei</td><td class="heima">Ja, heime hos deg</td></tr>
+    </tbody>
+  </table></div>
+  <p class="small">Prisar og vilkår per november 2026. Kjelder blir lista her.</p>
+</div></section>`;
+
+const packages = () => `
+<section id="pris"><div class="wrap stack" style="gap:28px">
+  <h2>Vel storleik</h2>
+  <div class="packages">
+    <div class="pkg rec"><span class="pill">Tilrådd</span><h3>Heima 2 TB</h3>
+      <p class="muted">For dei fleste familiar.</p>
+      <p class="price">7 990 kr</p><p class="muted">for Heima-boksen</p>
+      <p class="sub">+ 89 kr/mnd</p><p class="muted">Tryggleikskopi av alt i Noreg, oppdateringar og assistenten.</p>
+      <a class="btn btn-primary" href="#reserver">Reserver Heima 2 TB</a></div>
+    <div class="pkg"><h3>Heima 4 TB</h3>
+      <p class="muted">For familiar med mykje video eller mange år med bilete.</p>
+      <p class="price">9 490 kr</p><p class="muted">for Heima-boksen</p>
+      <p class="sub">+ 129 kr/mnd</p><p class="muted">Tryggleikskopi av alt i Noreg, oppdateringar og assistenten.</p>
+      <a class="btn btn-ghost" href="#reserver">Reserver Heima 4 TB</a></div>
+  </div>
+  <p class="small">Estimerte prisar inkl. mva. Prisen er ikkje endeleg. Boksen kan delbetalast.</p>
+</div></section>`;
+
+const faqItems = [
+  ["Kva om boksen vert øydelagd, eller huset brenn?", "Då hentar du alt tilbake frå tryggleikskopien i Noreg med nøkkelen på mobilen. Ny boks, same minne."],
+  ["Er det vanskeleg å setje opp?", "Set boksen i straumen, kople han til ruteren og skann ein kode med mobilen. Ferdig."],
+  ["Kva skjer om eg sluttar å betale, eller om de legg ned?", "Boksen held fram med å verke heime hos deg, og du kan alltid ta med deg alt. Det lovar vi skriftleg."],
+  ["Kvifor betale når eg får lagring gratis med mobilabonnementet?", "Gratis lagring ligg på nokon andre sin server, og forsvinn når du byter selskap. Heima er din."],
+  ["Kan eg stole på det assistenten seier om breva mine?", "Assistenten forklarer og minner deg på fristar, men originalbrevet er alltid fasit. Du ser alltid kva han byggjer svaret på."],
+  ["Kva om eg mistar mobilen?", "Alle vaksne i familien har sin eigen nøkkel, akkurat som husnøkkelen. Vil du ha ekstra tryggleik, får du eit nøkkelkort på papir."],
+];
+const faq = () => `
+<section id="sporsmal"><div class="wrap narrow stack">
+  <h2>Spørsmål du kanskje har</h2>
+  <div>${faqItems.map(([q, a]) => `<details><summary>${q}</summary><p>${a}</p></details>`).join("")}</div>
+</div></section>`;
+
+const radio = (name, opts, type = "radio", checked = -1) => `<div class="opts">${opts.map((o, i) =>
+  `<label class="opt"><input type="${type}" name="${name}" value="${o}" ${i === checked ? "checked" : ""}><span>${o}</span></label>`).join("")}</div>`;
+
+const reserve = () => `
+<section id="reserver" class="band-night"><div class="wrap narrow stack" style="gap:24px">
+  <p class="eyebrow" style="color:var(--glow)">Reservasjon</p>
+  <h2>Reserver Heima, heilt uforpliktande</h2>
+  <p class="lede">Dette er ikkje ei bestilling. Det kostar ingenting og bind deg ikkje til noko. Vi gir deg beskjed når Heima kjem, eller om vi vel å ikkje lage han.</p>
+  <form class="reserve" style="color:var(--ink)" novalidate>
+    <fieldset><legend>Kva storleik?</legend>${radio("pakke", ["Heima 2 TB", "Heima 4 TB"], "radio", 0)}</fieldset>
+    <label class="field" for="epost">E-post<input id="epost" type="email" autocomplete="email" placeholder="namn@døme.no"></label>
+    <label class="field" for="postnr">Postnummer <span class="hint">Så vi veit kvar i landet interessa er.</span><input id="postnr" inputmode="numeric" maxlength="4" placeholder="5003"></label>
+    <fieldset><legend>Kor mange er de i hushaldet?</legend>${radio("hushald", ["1", "2", "3–4", "5 eller fleire"])}</fieldset>
+    <fieldset><legend>Kvar ligg bileta dykkar i dag? <span class="hint">Vel så mange du vil.</span></legend>${radio("bilete", ["iCloud", "Google Foto", "Jottacloud", "Telenor eller Telia Sky", "Berre på mobilen", "Veit ikkje"], "checkbox")}</fieldset>
+    <fieldset><legend>Kva er viktigast for deg?</legend>${radio("viktigast", ["Berre familien har nøkkelen", "Assistenten som les breva", "Alle minna, lette å finne"])}</fieldset>
+    <fieldset><legend>Ville du kjøpt Heima til denne prisen?</legend>${radio("pris", ["Ja", "Kanskje", "Nei, det er for dyrt"])}</fieldset>
+    <fieldset><legend>Vil du kunne delbetale boksen?</legend>${radio("delbetal", ["Ja", "Nei", "Veit ikkje"])}</fieldset>
+    <div class="stack" style="gap:12px">
+      <label class="consent"><input type="checkbox" id="c1"><span>Eg er 18 år eller eldre.</span></label>
+      <label class="consent"><input type="checkbox" id="c2"><span>Ja, gi meg beskjed på e-post når Heima kjem.</span></label>
+      <label class="consent"><input type="checkbox" id="c3"><span>Eg vil gjerne bli intervjua eller svare på ei kort undersøking. <span class="hint">(valfritt)</span></span></label>
+    </div>
+    <div class="stack" style="gap:10px">
+      <button class="btn btn-primary" type="submit" style="justify-self:start">Reserver – heilt uforpliktande</button>
+      <p class="small">Vi lagrar berre e-posten, postnummeret og svara dine, i EU, og slettar alt automatisk seinast seks månader etter at vi har bestemt oss. Du kan melde deg av når som helst. <a href="#">Personvernerklæring</a></p>
+    </div>
+  </form>
+  <div class="done" hidden style="color:var(--ink)"><h3>Takk! Sjekk e-posten din for å stadfeste.</h3><p class="muted">Reservasjonen gjeld først når du har trykt på lenkja i e-posten.</p></div>
+</div></section>`;
+
+const footer = () => `
+<footer class="site"><div class="wrap">
+  <p class="sign">Det som er ditt, blir heima.</p>
+  <p>Heima er eit konsept frå <strong>[Selskapsnamn AS]</strong>, org.nr. [000 000 000], [adresse]. Kontakt: [e-post]. Denne sida er marknadsføring.</p>
+  <p>Vi brukar ingen informasjonskapslar (cookies). <a href="#">Personvernerklæring</a></p>
+</div></footer>`;
+
+// ---------- three structurally different landing pages ----------
+const heroA = () => `
+<section class="hero-a" style="padding:0"><div class="wrap">
+  <div class="stack" style="gap:22px">
+    <h1>${H1}</h1><p class="lede">${SUB}</p>
+    <div class="row">${CTA}<a class="btn btn-ghost" href="#slik">Slik verkar det</a></div>
+  </div>
+  ${img("Heima-boksen, produktbilete", 440)}
+</div></section>`;
+
+const heroB = () => `
+<section class="hero-b" style="padding:0"><div class="wrap">
+  <div class="stack" style="gap:22px">
+    <h1>${H1}</h1><p class="lede">${SUB}</p>
+    <div class="row">${CTA}<a class="btn btn-ghost" href="#samanlikning">Sjå samanlikninga</a></div>
+  </div>
+  <div class="mini" aria-label="Kven kan sjå bileta dine?">
+    <div class="h"><span>Kven kan sjå bileta dine?</span></div>
+    <div><span>iCloud</span><span>Apple*</span></div>
+    <div><span>Google Foto</span><span>Google</span></div>
+    <div><span>Jottacloud</span><span>Jottacloud</span></div>
+    <div><span>Heima</span><span>Berre familien</span></div>
+  </div>
+</div></section>`;
+
+const screens = {
+  start: `<h4>Kom i gang</h4><div class="card">📦 Heima-boksen funnen</div><div class="card"><strong>Lag familienøkkelen</strong><br>Bruk Face ID. Nøkkelen blir berre på mobilen din.</div><div class="card" style="background:#F5E5CC">Lag nøkkel med Face ID</div>`,
+  finn: `<h4>Finn bilete</h4><div class="search">bestemor på hytta sommaren 2019</div><p style="margin:0;color:#556074">Bestemor · Hytta · juni–august 2019</p><div class="thumbs"><span></span><span></span><span></span><span></span><span></span><span></span></div>`,
+  brev: `<h4>Forstå eit brev</h4><div class="card">📄 Brev frå NAV</div><div class="card">Vedtak om foreldrepengar. Frist for å endre: <strong>3. desember</strong>.</div><div class="card" style="background:#F5E5CC">Minn meg på det 26. november</div>`,
+  kven: `<h4>Kven kan sjå dette?</h4><div class="card">👤 Kari (deg)<br>👤 Ola</div><div class="card"><strong>Heima-lovnaden</strong><br>Boksen verkar alltid, og alt er alltid ditt.</div><div class="card">Ta med deg alt</div>`,
+};
+const heroC = () => `
+<section class="hero-c" style="padding:0"><div class="wrap">
+  <div class="stack" style="gap:22px">
+    <h1>${H1}</h1><p class="lede">${SUB}</p>
+    <div class="row">${CTA}</div>
+    <p class="small" style="margin-top:12px">Prøv appen sjølv:</p>
+    <div class="tabs" role="tablist">
+      <button role="tab" data-s="start" aria-selected="true">Kom i gang</button>
+      <button role="tab" data-s="finn" aria-selected="false">Finn bilete</button>
+      <button role="tab" data-s="brev" aria-selected="false">Forstå eit brev</button>
+      <button role="tab" data-s="kven" aria-selected="false">Kven kan sjå dette?</button>
+    </div>
+    <p class="small">Plassholdar. Den klikkbare prototypen kjem frå eigen ticket.</p>
+  </div>
+  <div class="phone"><div class="screen" id="screen">${screens.start}</div></div>
+</div></section>`;
+
+const VARIANTS = {
+  D: { name: "Valt: C-hero + A-rekkjefølgje", build: () => [concept(), header(), heroC(), album(), reasons(), how(), assistant(), promise(), compare(), packages(), faq(), reserve(), footer()] },
+  A: { name: "Forteljinga", build: () => [concept(), header(), heroA(), album(), reasons(), how(), assistant(), promise(), compare(), packages(), faq(), reserve(), footer()] },
+  B: { name: "Samanlikninga først", build: () => [concept(), header(), heroB(), reasons(), compare(), assistant(), packages(), promise(), how(), faq(), reserve(), footer()] },
+  C: { name: "Prøv sjølv", build: () => [concept(), header(), heroC(), reasons(), assistant(), how(), album(), packages(), compare(), promise(), faq(), reserve(), footer()] },
+};
+const KEYS = Object.keys(VARIANTS);
+
+function current() {
+  const h = location.hash.replace("#v-", "");
+  return KEYS.includes(h) ? h : "D";
+}
+function render() {
+  const v = current();
+  document.getElementById("app").innerHTML = VARIANTS[v].build().join("");
+  document.getElementById("vlabel").textContent = `${v} · ${VARIANTS[v].name}`;
+  wire();
+}
+function go(step) {
+  const i = (KEYS.indexOf(current()) + step + KEYS.length) % KEYS.length;
+  location.hash = "v-" + KEYS[i];
+  window.scrollTo(0, 0);
+}
+function wire() {
+  document.querySelectorAll(".tabs button").forEach(b => b.addEventListener("click", () => {
+    document.querySelectorAll(".tabs button").forEach(x => x.setAttribute("aria-selected", x === b));
+    document.getElementById("screen").innerHTML = screens[b.dataset.s];
+  }));
+  const f = document.querySelector("form.reserve");
+  f?.addEventListener("submit", e => { e.preventDefault(); f.hidden = true; f.nextElementSibling.hidden = false; });
+  document.querySelectorAll('a[href^="#"]:not([href^="#v-"])').forEach(a => a.addEventListener("click", e => {
+    e.preventDefault();
+    const id = a.getAttribute("href").slice(1);
+    const t = id && document.getElementById(id);
+    if (t) t.scrollIntoView({ behavior: "smooth" }); else window.scrollTo({ top: 0, behavior: "smooth" });
+  }));
+}
+document.getElementById("prev").onclick = () => go(-1);
+document.getElementById("next").onclick = () => go(1);
+document.addEventListener("keydown", e => {
+  if (e.target.closest("input, textarea, [contenteditable]")) return;
+  if (e.key === "ArrowLeft") go(-1);
+  if (e.key === "ArrowRight") go(1);
+});
+window.addEventListener("hashchange", () => { if (location.hash.startsWith("#v-") || location.hash === "") render(); });
+render();
+</script>

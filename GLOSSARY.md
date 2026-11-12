@@ -20,6 +20,32 @@ _Avoid_: Client, Heima-app (without the definite ending)
 The small monthly payment a Household makes on top of buying Heima-boksen. It covers the backup copy in Norway, updates and the assistant.
 _Avoid_: Plan, membership, licence
 
+## Promise
+
+**Digital sovereignty**:
+The Household's full ownership of its data: it lives in their home, only they hold the key, no foreign law can reach it, and it stays theirs whatever happens to Heima. Heima's main promise.
+_Avoid_: Data sovereignty, privacy (alone), "Norwegian data", security
+
+**Someone else's cloud**:
+Any service that keeps the Household's data on the provider's servers where the provider could technically read it, such as iCloud, Google Photos and Jottacloud.
+_Avoid_: The cloud, big tech (when Jottacloud is included)
+
+**Household key**:
+The secret that encrypts the Household's backup copy. Only the Household's Members can unlock it; Heima never holds it.
+_Avoid_: Password, master key, encryption key
+
+**Passkey**:
+A Member's personal way to unlock the Household key on their own phone, using Face ID or a fingerprint. Every adult Member has one.
+_Avoid_: Login, password, PIN
+
+**Key card**:
+An optional paper copy of the Household key, kept at home as a last resort if every Passkey is lost.
+_Avoid_: Recovery code, backup key
+
+**Continuity guarantee**:
+Heima's public, contractual promise that Heima-boksen keeps working locally and all data can be exported, even if the Subscription ends or Heima shuts down.
+_Avoid_: End-of-life policy, warranty
+
 ## People
 
 **Household**:

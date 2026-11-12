@@ -24,19 +24,44 @@ A private cloud and AI assistant that lives in the family's living room. Status:
 - **The box:** looks like furniture, not electronics. Wood or ceramic, the size of a book, with a soft amber glow when the AI is working. Something people want on the shelf rather than hidden in a cupboard.
 - **Voice:** calm, plain Norwegian, slightly dry. Example: *"Bildene dine er heima. Vi kan ikke se dem. Selv om vi ville."* ("Your photos are at home. We can't see them. Even if we wanted to.")
 
-## 3. Value proposition
+## 3. Positioning
 
-> **For Norwegian families** whose lives are stored in iCloud and Google Photos, **Heima** is a private cloud and AI assistant that lives in your home. It stores the family's photos and documents, finds anything in seconds, and helps with the paperwork, **without your life being stored on a US server.**
+*Decided in [Positioning against Jottacloud, iCloud and NAS](https://github.com/randax/produktutvikling/issues/6), 2026-11-12.*
+
+> **For Norwegian families who want their digital life to be their own, Heima is the private cloud that lives in your home. Unlike iCloud, Google Photos and Jottacloud, nobody but you can see the family's photos and documents (not us, and not foreign authorities), and they stay yours whatever happens to us. No technical skills needed.**
+
+- **Frame:** *Someone else's cloud* (iCloud, Google Photos, Jottacloud) is easy but not private. A NAS is private but technical. Heima is both.
+- **Main message: digital sovereignty.**
+  - **Control:** the data lives at home, and only the family holds the key.
+  - **Jurisdiction:** no foreign law can reach it.
+  - **Independence:** it stays theirs whatever happens to Heima.
+- **Second message: the assistant, which privacy makes possible.** *"You'd never let Google's AI read your letters from NAV, the bank and the doctor. Heima's assistant can, because it lives at home with you and never sends anything out."*
+- **The key:** a Household key that only Members can unlock.
+  - Every adult Member unlocks it with their own Passkey (Face ID or fingerprint), and synced passkeys are allowed.
+  - An optional paper Key card is available as a last resort.
+  - Heima never holds the key.
+- **Proof points:**
+  - Open-source software on Heima-boksen.
+  - A published independent security audit.
+  - A public Continuity guarantee: the box keeps working locally and all data can be exported even if the Subscription ends or Heima shuts down.
+- **Competitors are named** in a factual comparison table on the site, verified by legal before publishing.
+- **Why not "data in Norway":** Jotta, Telenor and Telia already offer it, often for free. What no Norwegian competitor can say is "we can't see your photos". Jottacloud is not end-to-end encrypted.
+
+## 4. Value proposition
+
+> **For Norwegian families** whose lives are stored in someone else's cloud, **Heima** is a private cloud and assistant that lives in your home. It stores the family's photos and documents, finds anything in seconds, and helps with the paperwork, **and nobody but you can ever look.**
 
 Three reasons a family would buy:
 
-1. **Memories:** every family photo backed up automatically and searchable in Norwegian, e.g. *"bestemor på hytta, sommeren 2019"* ("grandma at the cabin, summer 2019").
-2. **Admin help:** take a photo of a letter from NAV or the tax office, a warranty or a contract, and Heima explains it and reminds you of deadlines.
-3. **Peace of mind:** no storage prices creeping up, no training on your data, and an encrypted backup in Norway that only you hold the key to.
+1. **Digital sovereignty:** the photos and documents live at home, only the family holds the key, and the data stays theirs whatever happens to Heima.
+2. **A private assistant:** take a photo of a letter from NAV or the tax office, a warranty or a contract, and Heima explains it and reminds you of deadlines, without anything leaving the house.
+3. **Memories:** every family photo backed up automatically and searchable in Norwegian, e.g. *"bestemor på hytta, sommaren 2019"* ("grandma at the cabin, summer 2019").
 
-**Why now:** cloud storage prices keep rising, there's growing concern about digital sovereignty and US jurisdiction over data, AI tools want access to everything you own, and fibre's symmetric upload speed finally makes a cloud at home realistic. That last point is our unfair advantage.
+**Why now:** cloud storage prices keep rising, there's growing concern about digital sovereignty and US jurisdiction over data, AI tools want access to everything you own, and fibre's symmetric upload speed finally makes a cloud at home realistic.
 
-## 4. The decisions to make first
+## 5. The decisions to make first
+
+*Original proposals. Business model since decided: the Buyer buys Heima-boksen (instalments allowed) and pays a small monthly Subscription; the price is set in the Pricing ticket. See the [map](https://github.com/randax/produktutvikling/issues/1) for current decisions.*
 
 | Decision | Recommendation |
 |---|---|
@@ -47,14 +72,14 @@ Three reasons a family would buy:
 | Language model | Test the Norwegian models from the National Library and UiO's language technology group against small international models. **Norwegian quality is a go/no-go criterion.** |
 | Price hypothesis | About 149–199 kr/month including the box, 2 TB and the backup. Bundled with internet it should cost about the same as iCloud 2 TB. |
 
-## 5. Biggest risks (test these first)
+## 6. Biggest risks (test these first)
 
 1. **iPhone:** iOS restricts photo upload in the background. Immich and others work around this, but it has to work flawlessly or the product fails.
 2. **Local AI vs ChatGPT:** don't compete on general intelligence. Compete on "knows your family and nobody else does".
 3. **Support costs:** hardware in the home creates support calls. Plan for zero setup: plug it in, scan a QR code, done.
 4. **Willingness to pay:** do enough people care about privacy to pay for it? This is the most important question.
 
-## 6. The first 90 days
+## 7. The first 90 days
 
 ### Weeks 1–3: find out whether anyone wants it
 - Interview 12–15 households: families with young children (who take lots of photos), grandparents, and privacy-conscious households.
@@ -73,7 +98,7 @@ Three reasons a family would buy:
 - Norwegian AI quality that the pilot households call **"good enough"**.
 - **Fewer than one support request** per household per month.
 
-## 7. Team for this phase
+## 8. Team for this phase
 
 - Product manager
 - Designer
@@ -81,7 +106,7 @@ Three reasons a family would buy:
 - Hardware partner
 - Help from legal and privacy specialists
 
-## 8. Possible next steps
+## 9. Possible next steps
 
 1. Build the landing page for the fake-door test.
 2. Write the interview guide for the customer interviews.

@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+/* Site tokens. Light by default, dark via prefers-color-scheme. */
+:root {
+  --bg: #f1f2f1;
+  --bg-alt: #eef0f1;
+  --surface: #ffffff;
+  --ink: #17223a;
+  --muted: #556074;
+  --line: #d6dae0;
+  --amber: #a9620f;
+  --amber-ink: #8c500b; /* amber dark enough for small text on --bg (AA) */
+  --amber-soft: #f5e5cc;
+  --on-amber: #ffffff;
+  --night: #141d2e;
+  --night-ink: #eceef2;
+  --night-muted: #9da8bb;
+  --night-line: #2e3a54;
+  --glow: #f2a63c;
+  --flag: #b4232a;
+  --flag-soft: #fbe3e3;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0e1522;
+    --bg-alt: #0e1522;
+    --surface: #162034;
+    --ink: #e8ebf0;
+    --muted: #9aa5b8;
+    --line: #27334b;
+    --amber: #f0a43a;
+    --amber-ink: #f0a43a;
+    --amber-soft: #33281a;
+    --on-amber: #1a1206;
+    --night: #0a101b;
+    --night-line: #27334b;
+    --flag: #ff8a8f;
+    --flag-soft: #3a1d22;
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-alt: var(--bg-alt);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-amber: var(--amber);
+  --color-amber-ink: var(--amber-ink);
+  --color-amber-soft: var(--amber-soft);
+  --color-on-amber: var(--on-amber);
+  --color-night: var(--night);
+  --color-night-ink: var(--night-ink);
+  --color-night-muted: var(--night-muted);
+  --color-night-line: var(--night-line);
+  --color-glow: var(--glow);
+  --color-flag: var(--flag);
+  --color-flag-soft: var(--flag-soft);
+
+  --font-display: var(--font-familjen), "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-public-sans), "Segoe UI", system-ui, sans-serif;
+}
+
+/* The phone mock always shows the app's own light palette, also in dark mode. */
+@theme {
+  --color-app: #f7f6f3;
+  --color-app-card: #ffffff;
+  --color-app-ink: #17223a;
+  --color-app-muted: #5c677a;
+  --color-app-line: #e3e5e9;
+  --color-app-amber: #8c500b;
+  --color-app-amber-soft: #f6e7d0;
+  --color-app-ok: #2f7a4f;
+  --color-app-ok-soft: #e2f1e7;
+
+  --animate-pulse-soft: pulse-soft 1.2s ease infinite;
+  --animate-toast: toast-in 0.25s ease;
+
+  @keyframes pulse-soft {
+    50% {
+      transform: scale(0.94);
+    }
+  }
+  @keyframes toast-in {
+    from {
+      transform: translateY(10px);
+      opacity: 0;
+    }
+  }
+}
+
+@utility wrap {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1080px;
+  padding-inline: max(16px, env(safe-area-inset-left, 0px));
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    line-height: 1.12;
+    text-wrap: balance;
+  }
+  :focus-visible {
+    outline: 3px solid var(--glow);
+    outline-offset: 2px;
+  }
+  [id] {
+    scroll-margin-top: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
